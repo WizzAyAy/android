@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Liste</string>
+    <string name="menu_action_1">ajouter</string>
+    <string name="ajouter">Ajouter</string>
+    <string name="liste">Liste</string>
+    <string name="priorit_e">Prioritée</string>
+    <string name="basse">Basse</string>
+    <string name="moyenne">Moyenne</string>
+    <string name="haute">Haute</string>
+</resources>

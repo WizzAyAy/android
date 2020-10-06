@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="415dp"
+        android:layout_height="727dp"
+        android:layout_margin="30dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="-2dp"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/listeTexte"
+            android:layout_width="401dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/liste" />
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="400dp"
+            android:layout_height="45dp"
+            android:text="Prioritée"
+            android:textSize="24sp" />
+
+
+        <RadioGroup
+            android:id="@+id/radio"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:background="@color/colorJaune"
+                android:text="Basse" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:background="@color/colorOrange"
+                android:text="Moyenne" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:background="@color/colorRouge"
+                android:text="Haute" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonAjouter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ajouter" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
