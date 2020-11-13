@@ -4,7 +4,7 @@
     <string name="ajouter">Ajouter</string>
     <string name="liste">Liste</string>
     <string name="priorit_e">Prioritée</string>
-    <string name="basse">Basse</string>
-    <string name="moyenne">Moyenne</string>
-    <string name="haute">Haute</string>
+    <string name="basse">basse</string>
+    <string name="moyenne">moyenne</string>
+    <string name="haute">haute</string>
 </resources>

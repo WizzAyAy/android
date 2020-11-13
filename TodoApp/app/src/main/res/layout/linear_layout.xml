@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lv_taches"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_taches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

@@ -1,48 +1,72 @@
 package com.example.todoapp;
 
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.todoapp.FakeData;
-
-import com.example.todoapp.FakeData;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int CHILD_ACTIVITY_ID = 1;
     private int activity_main;
-    private ListView listViewTache;
+    private RecyclerView RecyclerViewTache;
     public String[] _tabString;
     private TachesAdapter mon_adapter;
+
+    static final String TACHE_BUNDLE_KEY = "MES_TACHES";
+    private ArrayList<ParcelableTask> Tasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.linear_layout);
 
-
-        listViewTache = (ListView)findViewById(R.id.lv_taches);
+        RecyclerViewTache = (RecyclerView)findViewById(R.id.rv_taches);
+        RecyclerViewTache.setLayoutManager(new LinearLayoutManager(this));
         mon_adapter = new TachesAdapter(this);
-        listViewTache.setAdapter(mon_adapter);
-        listViewTache.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TachesAdapter.TachesItem item = mon_adapter.getItem(i);
-                Toast.makeText(MainActivity.this, item.textTache+ " "+item.priority, Toast.LENGTH_SHORT).show();
-            }
-        });
+        RecyclerViewTache.setAdapter(mon_adapter);
 
-        ajouterListeText();
+        Tasks = new ArrayList<ParcelableTask>();
 
-        
+        ItemTouchHelper.SimpleCallback item_touch_helper_callback =
+                new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        int position = (int) viewHolder.itemView.getTag();
+                        mon_adapter.supprmie(position);
+                        Tasks.remove(position);
+                    }
+                };
+        new ItemTouchHelper(item_touch_helper_callback).attachToRecyclerView(RecyclerViewTache);
+
+        if(savedInstanceState == null)
+            ajouterListeText();
+
+        else {
+            Tasks = savedInstanceState.getParcelableArrayList(TACHE_BUNDLE_KEY);
+        }
+            for(ParcelableTask pt : Tasks)
+                    mon_adapter.ajoute(pt.text, pt.prio);
+    }
+
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(TACHE_BUNDLE_KEY,Tasks);
     }
 
     public void ajouterListeText(){
@@ -50,28 +74,36 @@ public class MainActivity extends AppCompatActivity {
         String ligne;
         String prio;
 
-
         for (int i = 0; i < _tabString.length; i++) {
             ligne = _tabString[i];
             prio = ligne.substring(1,2);
             ligne = ligne.substring(3);
 
-            if(prio.equals("1"))
-                mon_adapter.ajoute(ligne, "basse");
-            else if(prio.equals("2"))
-                mon_adapter.ajoute(ligne,"moyenne");
-            else if(prio.equals("3"))
-                mon_adapter.ajoute(ligne,"haute");
+            if(prio.equals("1")){
+                Tasks.add(new ParcelableTask(ligne,"basse"));
+            }
+
+            else if(prio.equals("2")){
+                Tasks.add(new ParcelableTask(ligne,"moyenne"));
+            }
+
+            else if(prio.equals("3")){
+                Tasks.add(new ParcelableTask(ligne,"haute"));
+            }
+
 
         }
-
     }
 
-    public void ajouterItemText(String prio, String text){
+    public void addToArrayParcelable (String text, String prio){
+        Tasks.add(new ParcelableTask(text, prio));
+    }
+
+    /*public void ajouterItemText(String prio, String text){
         TextView textView = findViewById(R.id.textList);
         String itemText = prio + " " + text;
         textView.setText(textView.getText()+ "\n" + itemText);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,9 +134,46 @@ public class MainActivity extends AppCompatActivity {
                      String prio = data.getStringExtra("prio");
                      String text = data.getStringExtra("text");
 
+                     //mon_adapter.ajoute(text,prio);
+                     addToArrayParcelable(text,prio);
                      mon_adapter.ajoute(text,prio);
                  }
              }
     }
 
+    static class ParcelableTask implements Parcelable {
+        private String text, prio;
+
+        public ParcelableTask(String text, String prio){
+            this.text = text;
+            this.prio = prio;
+        }
+        protected ParcelableTask(Parcel in) {
+            text = in.readString();
+            prio = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(text);
+            dest.writeString(prio);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<ParcelableTask> CREATOR = new Creator<ParcelableTask>() {
+            @Override
+            public ParcelableTask createFromParcel(Parcel in) {
+                return new ParcelableTask(in);
+            }
+
+            @Override
+            public ParcelableTask[] newArray(int size) {
+                return new ParcelableTask[size];
+            }
+        };
+    }
 }
