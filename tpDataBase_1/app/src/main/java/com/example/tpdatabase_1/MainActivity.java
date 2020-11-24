@@ -2,6 +2,7 @@ package com.example.tpdatabase_1;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -68,6 +69,24 @@ public class MainActivity extends AppCompatActivity {
                 addToArrayParcelable(nom,strDate);
                 mon_adapter.ajoute(nom,strDate);
 
+                try
+                {
+                    ContentValues cv = new ContentValues();
+                    cv.put(ContratDBAttente.Personnes.COLUMN_NAME, nom);
+                    cv.put(ContratDBAttente.Personnes.COLUMN_DATE, strDate);
+                    db.beginTransaction();
+                    //clear the table first
+                    db.delete (ContratDBAttente.Personnes.TABLE_NAME,null,null);
+                    db.insert(ContratDBAttente.Personnes.TABLE_NAME, null, cv);
+                    db.setTransactionSuccessful();
+                }
+                catch (SQLException e) {
+                    //too bad :(
+                }
+                finally
+                {
+                    db.endTransaction();
+                }
             }
         });
 
