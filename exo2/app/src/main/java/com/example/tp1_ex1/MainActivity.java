@@ -11,9 +11,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
-
     public void displayMsg(){
         EditText edList = findViewById(R.id.listeTexte);
         String text = edList.getText().toString();

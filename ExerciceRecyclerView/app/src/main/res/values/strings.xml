@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Exercice RecyclerView</string>
+    <string name="add_slot">Ajouter</string>
+    <string name="action_add_slot">Ajouter un nouveau cours</string>
+    <string name="txt_author">Enseignant</string>
+    <string name="txt_title">Matière</string>
+</resources>
