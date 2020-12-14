@@ -7,4 +7,7 @@
     <string name="basse">basse</string>
     <string name="moyenne">moyenne</string>
     <string name="haute">haute</string>
+
+    <string name="option_police">option_police</string>
+    <string name="option_prio">option_prio</string>
 </resources>

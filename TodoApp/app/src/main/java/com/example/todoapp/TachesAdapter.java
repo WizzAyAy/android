@@ -14,10 +14,22 @@ import java.util.ArrayList;
 public class TachesAdapter extends RecyclerView.Adapter<TachesAdapter.TachesAdapterViewHolder> {
     private Context context;
     private ArrayList<TachesItem> list;
+    public String taille;
+    public boolean prioVisible;
 
     public TachesAdapter (Context context){
         this.context = context;
         list = new ArrayList<TachesItem>();
+    }
+
+    public void setTaille(String taille){
+        this.taille = taille;
+        System.out.println("taille apres le set " + this.taille);
+    }
+
+    public void setPrioVisible(boolean b){
+        prioVisible = b;
+        System.out.println("prio apres le set " + prioVisible);
     }
 
     @NonNull
@@ -40,8 +52,16 @@ public class TachesAdapter extends RecyclerView.Adapter<TachesAdapter.TachesAdap
         if(tachesItem.priority.equals("haute"))
             tachesAdapterViewHolder.couleur.setBackgroundColor(0xFFe33e32);
 
+        if(taille != null) {
+            System.out.println("taile et prio dans onBindViewHolder = " + taille + " " + prioVisible);
+            tachesAdapterViewHolder.tache.setTextSize(Float.parseFloat(taille));
+            if (prioVisible == false) tachesAdapterViewHolder.couleur.setVisibility(View.INVISIBLE);
+            tachesAdapterViewHolder.couleur.setVisibility(View.VISIBLE);
+        }
+
         //setTag pour stocker l'id de l'item directemnt avec la vue
         tachesAdapterViewHolder.itemView.setTag(i);
+
     }
 
     @Override
@@ -76,7 +96,6 @@ public class TachesAdapter extends RecyclerView.Adapter<TachesAdapter.TachesAdap
             couleur = (View) itemView.findViewById(R.id.coloredSquare);
         }
     }
-
     static class TachesItem {
         String textTache;
         String priority;

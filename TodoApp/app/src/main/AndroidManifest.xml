@@ -17,6 +17,11 @@
             </intent-filter>
         </activity>
       <activity android:name=".addAcivity"> </activity>
+    <activity
+        android:name=".SettingsActivity"
+        android:parentActivityName=".MainActivity"
+        android:label="Settings">
+    </activity>
     </application>
 
 </manifest>

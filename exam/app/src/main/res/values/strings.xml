@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">exam</string>
+    <string name="button_addActivity_add">ajouter</string>
+    <string name="menu_action_1">ajouter</string>
+</resources>

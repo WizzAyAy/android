@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/option_prio"
+        android:title="affichier les priorité ?"
+        android:summaryOn="oui"
+        android:summaryOff="non">
+    </CheckBoxPreference>
+
+    <EditTextPreference
+        android:defaultValue=""
+        android:key="@string/option_police"
+        android:title="quel taille fait ta chupachoups ?"
+        ></EditTextPreference>
+</PreferenceScreen>

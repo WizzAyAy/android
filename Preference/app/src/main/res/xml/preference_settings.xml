@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/cle1"
+        android:title="es tu un bg whouuuuala ?"
+        android:summaryOn="oui"
+        android:summaryOff="non">
+    </CheckBoxPreference>
+
+    <EditTextPreference
+        android:defaultValue=""
+        android:key="@string/cle2"
+        android:title="quel taille fait ta chupachoups ?"
+    ></EditTextPreference>
+</PreferenceScreen>
