@@ -14,17 +14,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
 
     private Context context;
     private ArrayList<Item> list;
+    public String taille;
 
     public Adapter (Context context){
         this.context = context;
         list = new ArrayList<>();
     }
 
-    public void ajoute(){
+    public void ajoute(String t){
         Adapter.Item item = new Adapter.Item();
 
         /*item.textTache = text;
         item.priority = priority;*/
+
+        item.text = t;
 
         list.add(item);
         this.notifyItemInserted(list.size() - 1);
@@ -49,11 +52,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
         Item Item = list.get(i);
 
         //AdapterViewHolder.tache.setText(tachesItem.textTache);
-        //tachesAdapterViewHolder.couleur.setBackgroundColor(0xFFe33e32);
+        //AdapterViewHolder.couleur.setBackgroundColor(0xFFe33e32);
+        System.out.println("============== " + taille + " ==============");
+
+        adapterViewHolder.textView.setText(Item.text);
+        adapterViewHolder.textView.setTextSize(Float.parseFloat(taille));
 
 
         //setTag pour stocker l'id de l'item directemnt avec la vue
-        //AdapterViewHolder.itemView.setTag(i);
+        adapterViewHolder.itemView.setTag(i);
     }
 
     @Override
@@ -65,19 +72,21 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
 
     public class AdapterViewHolder extends RecyclerView.ViewHolder {
         //private TextView tache
-        public View itemView;
+        private TextView textView;
 
         public AdapterViewHolder (View itemView){
             super(itemView);
-            this.itemView = itemView;
             //ici les itemView.findViewById(R.id. ... );
             //tache = (TextView) itemView.findViewById(R.id.textTache);
+
+            textView = (TextView) itemView.findViewById(R.id.text);
         }
     }
 
     static class Item {
         //ici les differents item qu'on va afficher dans le recycler view
         //String textTache;
+        String text;
     }
 
 }

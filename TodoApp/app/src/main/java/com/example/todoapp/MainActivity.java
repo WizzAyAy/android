@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         } finally {
             db.endTransaction();
         }
-}
+    }
     static class ParcelableTask implements Parcelable {
         private String text, prio;
 

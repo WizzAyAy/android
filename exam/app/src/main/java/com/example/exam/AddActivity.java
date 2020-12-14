@@ -24,14 +24,16 @@ public class AddActivity extends Activity {
     }
 
     private void donneMessage() {
-
         //recuperation des champs pour les renvoyer dans la main activity
 
-        /* Intent returnIntent = new Intent();
-        returnIntent.putExtra("text",text);
-        returnIntent.putExtra("prio",prio);
+        EditText edList = findViewById(R.id.editText);
+        String text = edList.getText().toString();
 
-        setResult(RESULT_OK,returnIntent);*/
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("text",text);
+        //returnIntent.putExtra("prio",prio);
+
+        setResult(RESULT_OK,returnIntent);
 
         finish();
 

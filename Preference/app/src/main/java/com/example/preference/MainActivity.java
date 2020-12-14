@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-
+        System.out.println("test onSharedPreferenceChanged");
         if (s.equals(getString(R.string.cle1))) {
             pref_value = sharedPreferences.getBoolean(s,true);
             if(pref_value) tv.append("vous etes un bg ! \n");

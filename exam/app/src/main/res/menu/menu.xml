@@ -9,4 +9,11 @@
         app:showAsAction="ifRoom"
         />
 
+    <item
+        android:id="@+id/menu_action_2"
+        android:title="@string/menu_action_2"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom"
+        />
+
 </menu>
